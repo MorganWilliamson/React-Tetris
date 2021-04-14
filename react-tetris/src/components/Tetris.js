@@ -8,22 +8,28 @@ import StartButton from "./StartButton";
 // Helpers
 import { createStage } from "../gameHelpers";
 
+// Styles
+import { StyledTetris, StyledTetrisWrapper } from "./styles/StyledTetris";
+
 const Tetris = () => {
 
     return (
-        <div>
-            <Stage stage={createStage()} />
+        <StyledTetrisWrapper>
+            
+            <StyledTetris>
+                <Stage stage={createStage()} />
 
-            <aside>
-                <div>
-                    <Display text="Score!" />
-                    <Display text="Rows!" />
-                    <Display text="Level!" />
-                </div>
-                <StartButton />
-            </aside>
-        
-        </div>
+                <aside>
+                    <div>
+                        <Display text="Score!" />
+                        <Display text="Rows!" />
+                        <Display text="Level!" />
+                    </div>
+                    <StartButton />
+                </aside>
+            </StyledTetris>
+
+        </StyledTetrisWrapper>
     );
 };
 
