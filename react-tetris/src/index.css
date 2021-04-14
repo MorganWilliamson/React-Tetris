@@ -1,0 +1,8 @@
+body {
+    margin: 0;
+};
+
+@font-face {
+    font-family: 'Karantina';
+    src: url('assets/Karantina/Karantina-Regular.ttf') format('tff');
+}
