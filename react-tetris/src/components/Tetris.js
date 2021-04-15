@@ -9,6 +9,7 @@ import StartButton from "./StartButton";
 import { createStage, checkCollision } from "../gameHelpers";
 
 // Hooks
+import { useInterval } from "../hooks/useInterval";
 import { usePlayer } from "../hooks/usePlayer";
 import { useStage } from "../hooks/useStage";
 
@@ -36,6 +37,7 @@ const Tetris = () => {
     const startGame = () => {
         // Reset everything.
         setStage(createStage());
+        setDropTime(1000);
         resetPlayer();
         setGameOver(false);
     };
@@ -54,8 +56,16 @@ const Tetris = () => {
         };
     };
 
+    const keyUp = ({ keyCode }) => {
+        if (!gameOver) {
+            if (keyCode === 40) {
+                setDropTime(1000);
+            }
+        }
+    }
+
     const dropPlayer = () => {
-        // Add special case later.
+        setDropTime(null);
         drop();
     };
 
@@ -69,13 +79,22 @@ const Tetris = () => {
                 dropPlayer();
             } else if (keyCode === 38) { // Rotate clockwise with up arrow
                 playerRotate(stage, 1);
-            }
-        }
+            };
+        };
     };
+
+    useInterval(() => {
+        drop();
+    }, dropTime);
 
     return (
         // Wrapper allows entire app to recognize key press, instead of just grid.
-        <StyledTetrisWrapper role="button" tabIndex="0" onKeyDown={e => move(e)}>
+        <StyledTetrisWrapper 
+            role="button" 
+            tabIndex="0" 
+            onKeyDown={e => move(e)} 
+            onKeyUp={keyUp}
+            >
             
             <StyledTetris>
                 <Stage stage={stage} />
