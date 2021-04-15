@@ -26,13 +26,17 @@ export const useStage = (player, resetPlayer) => {
                     };
                 });
             });
+            // Run collision detection function:
+            if (player.collided) {
+                resetPlayer();
+            }
             
             return newStage;
         };
 
 
         setStage(prev => updateStage(prev))
-    }, [player])
+    }, [player, resetPlayer])
 
     return [stage, setStage];
 };
