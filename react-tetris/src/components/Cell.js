@@ -8,4 +8,5 @@ const Cell = ({ type }) => {
     );
 };
 
-export default Cell;
+// Memoize the Cell component, only re-render the cells that change.
+export default React.memo(Cell);
